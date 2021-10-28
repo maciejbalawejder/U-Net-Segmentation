@@ -14,5 +14,5 @@ The main achievemtents of this novel approach were:
 | Loss function | Cross Entropy + Dice Loss | 
 | Optimizer    | Adam | 
 | Learning rate | 0.001 | 
-| Batch   | 16 | 
+| Batch   | 32 | 
 | Epochs | 200 |
