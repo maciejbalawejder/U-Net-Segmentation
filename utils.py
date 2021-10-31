@@ -13,32 +13,6 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import os
 
-def class2rgb(out):
-  classes = {
-    0 : [0,0,0], # unlabeled
-    1 : [70,70,70], # building
-    2 : [190,153,153], # fence
-    3 : [250,170,160], # other
-    4 : [220,20,60], # pedestrian
-    5 : [153,153,153], # pole
-    6 : [157,234,50], # road line
-    7 : [128,64,128], # road
-    8 : [244,35,232], # sidewalk
-    9 : [107,142,35], # vegetation
-    10: [0,0,142], # car
-    11: [102,102,156], # wall
-    12: [220,220,0] # traffic sign
-  }
-  o = out[...,0]
-  seg = o.reshape(-1)
-  mask = np.zeros((seg.shape[0],3))
-  
-
-  for idx, label in enumerate(seg):
-    mask[idx] = classes[int(label)]
-
-  return mask.reshape(out.shape)
-
 def results(img1, img2):
   intersection = np.logical_and(img1,img2)
   union = np.logical_or(img1,img2)
@@ -54,8 +28,8 @@ def scores(y, out):
   dice = 0
   iou = 0
   for val in range(y.shape[0]):
-    y_c = F.one_hot(y[val].to(torch.int64),channels).reshape(channels,256,256)
-    p_c = F.one_hot(classes[val].to(torch.int64),channels).reshape(channels,256,256)
+    y_c = F.one_hot(y[val].to(torch.int64),channels).reshape(channels,150,200)
+    p_c = F.one_hot(classes[val].to(torch.int64),channels).reshape(channels,150,200)
     for idx in range(channels):
       d, i = results(p_c.cpu().numpy(), y_c.cpu().numpy())
       dice+=d
