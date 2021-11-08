@@ -8,7 +8,7 @@ The main achievemtents of this novel approach were:
 - outperform CNN models in __segmentation tasks__
 - faster training time
 
-## Training dataset 
+## Dataset 
 ![Lyft Perception Challenge](https://github.com/maciejbalawejder/UNet-image_segmentation/blob/main/data/example.png)
 ## Hyperparameters
 
